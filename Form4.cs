@@ -20,7 +20,7 @@ namespace ATM
                 return;
             }
 
-            Program.findAccount(cardNumber, pinCode);
+            Program.FindAccount(cardNumber, pinCode);
         }
     }
 }

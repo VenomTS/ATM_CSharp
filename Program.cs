@@ -128,7 +128,7 @@ namespace ATM
 
         }
 
-        public static bool findAccount(string cardNumber, string pin)
+        public static bool FindAccount(string cardNumber, string pin)
         {
             
             var query = $"SELECT * FROM Accounts WHERE CardNumber = {cardNumber}";
