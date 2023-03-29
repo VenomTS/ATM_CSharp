@@ -20,7 +20,9 @@ namespace ATM
 
         private void button2_Click(object sender, EventArgs e) // Login
         {
-            throw new System.NotImplementedException();
+            var loginForm = new Form4();
+            loginForm.ShowDialog(this);
+            loginForm.Dispose();
         }
     }
 }

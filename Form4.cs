@@ -12,7 +12,15 @@ namespace ATM
 
         private void button1_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            var cardNumber = textBox1.Text;
+            var pinCode = textBox2.Text;
+            if (cardNumber.Length == 0 || pinCode.Length != 4)
+            {
+                MessageBox.Show("Your input was incorrect", "ERROR - Incorrect Input");
+                return;
+            }
+
+            Program.findAccount(cardNumber, pinCode);
         }
     }
 }

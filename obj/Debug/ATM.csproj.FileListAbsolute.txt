@@ -34,3 +34,29 @@ C:\Users\VenomTS\RiderProjects\ATM\ATM\bin\Debug\System.Memory.xml
 C:\Users\VenomTS\RiderProjects\ATM\ATM\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\VenomTS\RiderProjects\ATM\ATM\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\VenomTS\RiderProjects\ATM\ATM\obj\Debug\ATM.Form4.resources
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\ATM.exe.config
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\ATM.exe
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\ATM.pdb
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\System.Buffers.dll
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\ZstdNet.dll
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\Google.Protobuf.pdb
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\Google.Protobuf.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\MySql.Data.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\System.Memory.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.AssemblyReference.cache
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.SuggestedBindingRedirects.cache
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.Form1.resources
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.Form2.resources
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.Form4.resources
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.Properties.Resources.resources
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.GenerateResource.cache
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.CoreCompileInputs.cache
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.CopyComplete
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.exe
+C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.pdb

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -55,6 +58,37 @@ namespace ATM
                 return (false, -1);
             }
         }
+
+        private static (bool, List<string>) ExecuteSelect(string query)
+        {
+            const string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=bank";
+            var connection = new MySqlConnection(connString);
+            var command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                var reader = command.ExecuteReader();
+                var data = new List<string>();
+                if (reader.Read())
+                {
+                    data.Add(reader.GetString(1));
+                    data.Add(reader.GetString(2));
+                    data.Add(reader.GetString(3));
+                    data.Add((reader.GetDouble(5)).ToString(CultureInfo.CurrentCulture));
+                }
+                else
+                {
+                    data = null;
+                }
+                connection.Close();
+                return (true, data);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error with database: " + e.Message);
+                return (false, null);
+            }
+        }
         
         public static (bool, string) CreateAccount(string firstName, string lastName, string pinCode)
         {
@@ -96,6 +130,27 @@ namespace ATM
 
         public static bool findAccount(string cardNumber, string pin)
         {
+            
+            var query = $"SELECT * FROM Accounts WHERE CardNumber = {cardNumber}";
+            var result = ExecuteSelect(query);
+            if (result.Item2 == null)
+            {
+                MessageBox.Show(
+                    "Your account wasn't found in the database\nCheck if your card number was inputted correctly",
+                    "ERRROR - Missing Account");
+                return false;
+            }
+            if (!result.Item1)
+            {
+                MessageBox.Show("There was an error trying to reach SQL server!", "ERROR - SQL Connection");
+                return false;
+            }
+
+            var name = result.Item2[0];
+            var surname = result.Item2[1];
+            var pinCode = result.Item2[2];
+            var balance = result.Item2[3];
+            MessageBox.Show($"Name: {name}\nSurname: {surname}\nPin Code: {pinCode}\nBalance: {balance}");
             return false;
         }
         
