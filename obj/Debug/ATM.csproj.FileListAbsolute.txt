@@ -60,3 +60,5 @@ C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.CoreCompileI
 C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.csproj.CopyComplete
 C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.exe
 C:\Users\VTS - Mobile\RiderProjects\ATM_CSharp\obj\Debug\ATM.pdb
+C:\Users\VenomTS\RiderProjects\ATM\ATM\obj\Debug\ATM.Form3.resources
+C:\Users\VenomTS\RiderProjects\ATM\ATM\obj\Debug\ATM.Form5.resources

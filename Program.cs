@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -32,7 +31,7 @@ namespace ATM
             return true;
         }
 
-        private static (bool, int) ExecuteQuery(string query)
+        public static (bool, int) ExecuteQuery(string query)
         {
             const string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=bank";
             var connection = new MySqlConnection(connString);
@@ -61,6 +60,9 @@ namespace ATM
 
         private static (bool, List<string>) ExecuteSelect(string query)
         {
+            /*
+             * Database should be ID, Name, Surname, Card Number, Pin Code, Balance
+             */
             const string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=bank";
             var connection = new MySqlConnection(connString);
             var command = new MySqlCommand(query, connection);
@@ -73,7 +75,7 @@ namespace ATM
                 {
                     data.Add(reader.GetString(1));
                     data.Add(reader.GetString(2));
-                    data.Add(reader.GetString(3));
+                    data.Add(reader.GetString(4));
                     data.Add((reader.GetDouble(5)).ToString(CultureInfo.CurrentCulture));
                 }
                 else
@@ -115,20 +117,16 @@ namespace ATM
         private static (bool, string) GenerateCardNumber()
         {
             Random rnd = new Random();
-            string cardNumber = rnd.Next(1000000000, 1999999999).ToString();
-            string query = $"SELECT CardNumber FROM Accounts WHERE CardNumber = {cardNumber}";
+            var cardNumber = rnd.Next(1000000000, 1999999999).ToString();
+            var query = $"SELECT CardNumber FROM Accounts WHERE CardNumber = {cardNumber}";
             var success = ExecuteQuery(query);
-            if (success.Item1)
-            {
-                if (success.Item2 == 0) return (true, cardNumber);
-                return GenerateCardNumber();
-            }
-
-            return (false, "");
+            if (!success.Item1) return (false, "");
+            if (success.Item2 == 0) return (true, cardNumber);
+            return GenerateCardNumber();
 
         }
 
-        public static bool FindAccount(string cardNumber, string pin)
+        public static void FindAccount(string cardNumber, string pin)
         {
             
             var query = $"SELECT * FROM Accounts WHERE CardNumber = {cardNumber}";
@@ -138,20 +136,28 @@ namespace ATM
                 MessageBox.Show(
                     "Your account wasn't found in the database\nCheck if your card number was inputted correctly",
                     "ERRROR - Missing Account");
-                return false;
+                return;
             }
             if (!result.Item1)
             {
                 MessageBox.Show("There was an error trying to reach SQL server!", "ERROR - SQL Connection");
-                return false;
+                return;
             }
 
+            if (result.Item2[2] != pin)
+            {
+                MessageBox.Show($"Pin code you have inputted is incorrect\nPlease try again",
+                    "ERROR - Invalid Pin Code");
+                return;
+            }
+            
             var name = result.Item2[0];
             var surname = result.Item2[1];
-            var pinCode = result.Item2[2];
             var balance = result.Item2[3];
-            MessageBox.Show($"Name: {name}\nSurname: {surname}\nPin Code: {pinCode}\nBalance: {balance}");
-            return false;
+
+            var selectForm = new Form3(name, surname, cardNumber, double.Parse(balance));
+            
+            selectForm.Show();
         }
         
     }
