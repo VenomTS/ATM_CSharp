@@ -34,7 +34,7 @@ namespace ATM
 
         private static (bool, int) ExecuteQuery(string query)
         {
-            const string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=bank";
+            const string connString = "datasource=185.27.134.10;port=3306;username=epiz_33916809;password=DoCioa5X5v5FH;database=epiz_33916809_database";
             var connection = new MySqlConnection(connString);
             var command = new MySqlCommand(query, connection);
             try
@@ -61,7 +61,11 @@ namespace ATM
 
         private static (bool, List<string>) ExecuteSelect(string query)
         {
-            const string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=bank";
+            /*
+             * datasource=127.0.0.1;port=3306;username=root;password=;database=bank  sql111.epizy.com
+             * datasource=185.27.134.10;port=3306;username=epiz_33916809;password=Zaporka123$;database=epiz_33916809_database
+             */
+            const string connString = "datasource=185.27.134.10;port=3306;username=epiz_33916809;password=DoCioa5X5v5FH;database=epiz_33916809_database";
             var connection = new MySqlConnection(connString);
             var command = new MySqlCommand(query, connection);
             try
@@ -97,35 +101,28 @@ namespace ATM
             if (!cardNumber.Item1) return (false, "");
             
             /* Establish Connection and save all data */
-            string idQuery = "SELECT MIN(ID + 1) FROM Accounts WHERE NOT EXISTS (SELECT * FROM Accounts t2 WHERE t2.ID = Accounts.ID + 1)";
-            string query = $"INSERT INTO Accounts SET ID = -1, FirstName = '{firstName}', LastName = '{lastName}', " +
+            var idQuery = "SELECT MIN(ID + 1) FROM Accounts WHERE NOT EXISTS (SELECT * FROM Accounts t2 WHERE t2.ID = Accounts.ID + 1)";
+            var query = $"INSERT INTO Accounts SET ID = -1, FirstName = '{firstName}', LastName = '{lastName}', " +
                            $"PinCode = '{pinCode}', CardNumber = '{cardNumber.Item2}', Balance = 0.00";
-            string updateQuery = $"UPDATE Accounts SET ID = ({idQuery}) WHERE CardNumber = '{cardNumber.Item2}'";
-            string removeQuery = $"DELETE FROM Accounts WHERE CardNumber = '{cardNumber.Item2}'";
-
-            var success = ExecuteQuery(query).Item1 && ExecuteQuery(updateQuery).Item2 == 1;
-            if (!success)
-            {
-                ExecuteQuery(removeQuery);
-                return (false, "");
-            }
-            return (true, cardNumber.Item2);
+            var updateQuery = $"UPDATE Accounts SET ID = ({idQuery}) WHERE CardNumber = '{cardNumber.Item2}'";
+            var removeQuery = $"DELETE FROM Accounts WHERE CardNumber = '{cardNumber.Item2}'";
+            
+            if (ExecuteQuery(query).Item1 && ExecuteQuery(updateQuery).Item2 == 1) return (true, cardNumber.Item2);
+            ExecuteQuery(removeQuery);
+            return (false, "");
         }
-        
+
         private static (bool, string) GenerateCardNumber()
         {
-            Random rnd = new Random();
-            string cardNumber = rnd.Next(1000000000, 1999999999).ToString();
-            string query = $"SELECT CardNumber FROM Accounts WHERE CardNumber = {cardNumber}";
-            var success = ExecuteQuery(query);
-            if (success.Item1)
+            while (true)
             {
+                var rnd = new Random();
+                var cardNumber = rnd.Next(1000000000, 1999999999).ToString();
+                var query = $"SELECT CardNumber FROM Accounts WHERE CardNumber = {cardNumber}";
+                var success = ExecuteQuery(query);
+                if (!success.Item1) return (false, "");
                 if (success.Item2 == 0) return (true, cardNumber);
-                return GenerateCardNumber();
             }
-
-            return (false, "");
-
         }
 
         public static bool FindAccount(string cardNumber, string pin)
